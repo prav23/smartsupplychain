@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CargoNodeServiceImpl implements CargoNodeService {
 
-    private static final Logger logger = LogManager.getLogger(ProjectServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(CargoNodeServiceImpl.class);
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -22,10 +22,11 @@ public class CargoNodeServiceImpl implements CargoNodeService {
     }
 
     @Override
-    public List<Sensor> getAllSensorData(Integer cargo_node_id){
+    public List<Sensor> getCargoNodeSensorData(Integer cargo_node_id){
         logger.info("getALLSensorData for given cargo_node_id: " + cargo_node_id);
 
         List<Sensor> sensorList = new ArrayList<>();
+        // Simulate sensor values at random here with latest time_stamp and update in sql table and send to backend cloud
         //String update_sensor_query = "UPDATE sensor set sensor_status = ? where sensor_id = ?";
         /*
         int update_status = jdbcTemplate.update(update_sensor_query, sensor_id, sensor_status);
@@ -39,4 +40,36 @@ public class CargoNodeServiceImpl implements CargoNodeService {
         */
         return sensorList;
     }
+
+    @Override
+    public List<Sensor> getAllCargoNodesSensorData(){
+        logger.info("getAllCargoNodesSensorData for all cargo nodes");
+
+        List<Sensor> sensorList = new ArrayList<>();
+        // Simulate sensor values at random here with latest time_stamp and update in sql table and send to backend cloud
+        //String update_sensor_query = "UPDATE sensor set sensor_status = ? where sensor_id = ?";
+        /*
+        int update_status = jdbcTemplate.update(update_sensor_query, sensor_id, sensor_status);
+        if(update_status !=0){
+            logger.info("updated sensor table with query " + update_sensor_query);
+        }
+        else{
+            logger.info("update sensor status failed for query" + update_sensor_query);
+            return false;
+        }
+        */
+        return sensorList;
+    }
+
+    @Override
+    public Boolean transferCargoNodeSensorData(Integer cargo_node_id){
+        return true;
+    }
+
+    @Override
+    public Boolean transferAllCargoNodesSensorData(){
+        return true;
+    }
+
+
 }

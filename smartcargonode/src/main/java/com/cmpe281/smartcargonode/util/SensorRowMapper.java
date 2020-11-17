@@ -13,7 +13,6 @@ public class SensorRowMapper implements RowMapper<Sensor> {
         Sensor sensor = new Sensor();
         sensor.setSensor_id(rs.getInt("sensor_id"));
         sensor.setCargo_node_id(rs.getInt("cargo_node_id"));
-        sensor.setSnm_id(rs.getInt("snm_id"));
         sensor.setSensor_name(rs.getString("sensor_name"));
         sensor.setSensor_data(rs.getString("sensor_data"));
         sensor.setSensor_data_format(rs.getString("sensor_data_format"));
