@@ -23,7 +23,7 @@ public class SensorServiceImpl implements SensorService{
     }
 
     @Override
-    public Boolean updateSensor(Integer sensor_id, Integer cargo_node_id, String sensor_name, String sensor_data,
+    public Boolean updateSensor(Integer sensor_id, Integer cargo_node_id, Integer snm_id, String sensor_name, String sensor_data,
                                 String sensor_data_format, String sensor_status, Date time_stamp){
         logger.info("updateSensorStatus for given sensor_id: " + sensor_id);
 

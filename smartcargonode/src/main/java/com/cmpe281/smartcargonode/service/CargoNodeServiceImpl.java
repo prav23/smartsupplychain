@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CargoNodeServiceImpl implements CargoNodeService {
@@ -42,8 +41,8 @@ public class CargoNodeServiceImpl implements CargoNodeService {
     }
 
     @Override
-    public List<Sensor> getAllCargoNodesSensorData(){
-        logger.info("getAllCargoNodesSensorData for all cargo nodes");
+    public List<Sensor> getAllCargoNodeSensorData(Integer snm_id){
+        logger.info("getAllCargoNodeSensorData for cargo nodes with given snm_id" + snm_id);
 
         List<Sensor> sensorList = new ArrayList<>();
         // Simulate sensor values at random here with latest time_stamp and update in sql table and send to backend cloud
@@ -62,7 +61,12 @@ public class CargoNodeServiceImpl implements CargoNodeService {
     }
 
     @Override
-    public Boolean transferCargoNodeSensorData(Integer cargo_node_id){
+    public Map<Integer, List<Integer>> cargoNodeNetworkMap(){
+        return new HashMap<Integer,List<Integer>>();
+    }
+
+    @Override
+    public Boolean transferAllCargoNodeSensorData(Integer snm_id){
         return true;
     }
 
@@ -71,5 +75,18 @@ public class CargoNodeServiceImpl implements CargoNodeService {
         return true;
     }
 
+    @Override
+    public Boolean createCargoNode(Integer cargo_node_id, Integer snm_id, String sensor_name, String sensor_data, String sensor_data_format, String sensor_status){
+        return true;
+    }
 
+    @Override
+    public Boolean updateCargoNode(Integer cargo_node_id, Integer snm_id, String sensor_name, String sensor_data, String sensor_data_format, String sensor_status, Date time_stamp){
+        return true;
+    }
+
+    @Override
+    public Boolean deleteCargoNode(Integer sensor_id, Integer cargo_node_id){
+        return true;
+    }
 }
