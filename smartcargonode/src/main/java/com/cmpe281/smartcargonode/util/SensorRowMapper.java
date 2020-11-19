@@ -17,7 +17,7 @@ public class SensorRowMapper implements RowMapper<Sensor> {
         sensor.setSensor_data(rs.getString("sensor_data"));
         sensor.setSensor_data_format(rs.getString("sensor_data_format"));
         sensor.setSensor_status(rs.getString("sensor_status"));
-        sensor.setTime_stamp(rs.getDate("time_stamp"));
+        sensor.setTime_stamp(rs.getTimestamp("time_stamp"));
 
         return sensor;
     }

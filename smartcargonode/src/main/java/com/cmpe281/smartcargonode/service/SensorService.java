@@ -1,13 +1,13 @@
 package com.cmpe281.smartcargonode.service;
 
-import java.util.Date;
+import com.cmpe281.smartcargonode.model.Sensor;
 
 public interface SensorService {
-    Boolean updateSensor(Integer sensor_id, Integer cargo_node_id, String sensor_name, String sensor_data,
-                         String sensor_data_format, String sensor_status, Date time_stamp);
+    Sensor updateSensor(Integer sensor_id, Integer cargo_node_id, String sensor_name, String sensor_data,
+                         String sensor_data_format, String sensor_status);
 
-    Boolean addSensor(Integer cargo_node_id, String sensor_name, String sensor_data,
-                      String sensor_data_format, String sensor_status);
+    Sensor addSensor(Integer cargo_node_id, String sensor_name, String sensor_data,
+                     String sensor_data_format, String sensor_status);
 
     Boolean deleteSensor(Integer sensor_id, Integer cargo_node_id);
 

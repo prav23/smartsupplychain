@@ -1,5 +1,6 @@
 package com.cmpe281.smartcargonode.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Sensor {
@@ -9,13 +10,13 @@ public class Sensor {
     private String sensor_data;
     private String sensor_data_format;
     private String sensor_status;
-    private Date time_stamp;
+    private Timestamp time_stamp;
 
     public Sensor(){
     }
 
     public Sensor(int sensor_id, int cargo_node_id, String sensor_name, String sensor_data,
-                  String sensor_data_format, String sensor_status, Date time_stamp){
+                  String sensor_data_format, String sensor_status, Timestamp time_stamp){
         this.sensor_id = sensor_id;
         this.cargo_node_id = cargo_node_id;
         this.sensor_name = sensor_name;
@@ -39,5 +40,5 @@ public class Sensor {
     public void setSensor_data(String sensor_data){ this.sensor_data = sensor_data;}
     public void setSensor_data_format(String sensor_data_format){ this.sensor_data_format = sensor_data_format;}
     public void setSensor_status(String sensor_status){ this.sensor_status = sensor_status;}
-    public void setTime_stamp(Date time_stamp){ this.time_stamp = time_stamp;}
+    public void setTime_stamp(Timestamp time_stamp){ this.time_stamp = time_stamp;}
 }
