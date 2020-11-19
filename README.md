@@ -3,7 +3,7 @@
 USE testdata;
 drop table sensor;
 CREATE TABLE sensor(
-      sensor_id INT NOT NULL,
+      sensor_id INT NOT NULL AUTO_INCREMENT,
       cargo_node_id INTEGER NOT NULL,
       sensor_name varchar(20) DEFAULT NULL,
       sensor_data varchar(25) DEFAULT NULL,
