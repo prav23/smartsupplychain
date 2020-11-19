@@ -6,7 +6,7 @@ CREATE TABLE sensor(
       sensor_id INT NOT NULL AUTO_INCREMENT,
       cargo_node_id INTEGER NOT NULL,
       sensor_name varchar(20) DEFAULT NULL,
-      sensor_data varchar(25) DEFAULT NULL,
+      sensor_data varchar(50) DEFAULT NULL,
       sensor_data_format varchar(25) DEFAULT NULL,
       sensor_status varchar(25) NOT NULL,
       time_stamp TIMESTAMP NOT NULL,
