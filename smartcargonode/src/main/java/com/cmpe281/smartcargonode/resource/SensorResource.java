@@ -26,14 +26,13 @@ public class SensorResource {
     @ApiOperation(value = "Updates a given sensor information in table",
             notes = "DB query against the 'sensor' table. Returns true if update success else returns false")
     public Boolean updateSensor(@ApiParam(value = "sensorId", required = true) @RequestParam Integer sensor_id,
-                                @ApiParam(value = "cargo_node_id", required = true) @RequestParam Integer cargo_node_id,
-                               @ApiParam(value = "snm_id", required = true) @RequestParam Integer snm_id,
+                              @ApiParam(value = "cargo_node_id", required = true) @RequestParam Integer cargo_node_id,
                               @ApiParam(value = "sensor_name", required = true) @RequestParam String sensor_name,
                               @ApiParam(value = "sensor_data", required = true) @RequestParam String sensor_data,
                               @ApiParam(value = "sensor_data_format", required = true) @RequestParam String sensor_data_format,
                               @ApiParam(value = "sensor_status", required = true) @RequestParam String sensor_status,
                               @ApiParam(value = "time_stamp", required = true) @RequestParam Date time_stamp) {
-        return sensorService.updateSensor(sensor_id, cargo_node_id, snm_id, sensor_name, sensor_data, sensor_data_format, sensor_status, time_stamp);
+        return sensorService.updateSensor(sensor_id, cargo_node_id, sensor_name, sensor_data, sensor_data_format, sensor_status, time_stamp);
     }
 
     @PostMapping("/addSensor")
