@@ -2,6 +2,8 @@
 
 USE testdata;
 drop table sensor;
+drop table cargo;
+
 CREATE TABLE sensor(
       sensor_id INT NOT NULL AUTO_INCREMENT,
       cargo_node_id INTEGER NOT NULL,
@@ -11,7 +13,21 @@ CREATE TABLE sensor(
       sensor_status varchar(25) NOT NULL,
       time_stamp TIMESTAMP NOT NULL,
       PRIMARY KEY(sensor_id)
+      FOREIGN KEY(cargo_node_id) REFERENCES cargo(cargo_node_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE cargo(
+      cargo_node_id INT NOT NULL AUTO_INCREMENT,
+      cargo_node_name varchar(50),
+      PRIMARY KEY(cargo_node_id),
+      unique(cargo_node_name)
+);
+
+INSERT INTO cargo VALUES
+(50,'truck_1'),
+(55, 'truck_2'),
+(60, 'truck_3');
+
 
 INSERT INTO sensor VALUES
 (1, 50, 'temperature','50','Celsius', 'Active', '1970-01-01 00:00:00'), 
