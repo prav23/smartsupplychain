@@ -1,5 +1,6 @@
 package com.cmpe281.smartcargonode.resource;
 
+import com.cmpe281.smartcargonode.model.Cargo;
 import com.cmpe281.smartcargonode.model.Sensor;
 import com.cmpe281.smartcargonode.service.CargoNodeService;
 import io.swagger.annotations.ApiOperation;
@@ -58,6 +59,7 @@ public class CargoNodeResource {
         return cargoNodeService.transferAllCargoNodesSensorData();
     }
 
+    /*
     @PostMapping("/addCargoNode")
     @ApiOperation(value = "Adds a cargo node with default sensor's data",
             notes = "DB query against the 'sensor' table.Returns Cargo Node if addition is successful")
@@ -67,6 +69,14 @@ public class CargoNodeResource {
                             @ApiParam(value = "sensor_data_format", required = true) @RequestParam String sensor_data_format,
                             @ApiParam(value = "sensor_status", required = true) @RequestParam String sensor_status){
         return cargoNodeService.addCargoNode(cargo_node_id, sensor_name, sensor_data, sensor_data_format, sensor_status);
+    }
+     */
+
+    @PostMapping("/addCargoNode")
+    @ApiOperation(value = "Adds a cargo node with given cargo_node_name",
+            notes = "DB query against the 'cargo' table.Returns Cargo Node if addition is successful")
+    public Cargo addCargoNode(@ApiParam(value = "cargo_node_name", required = true) @RequestParam String cargo_node_name){
+        return cargoNodeService.addCargoNode(cargo_node_name);
     }
 
     @DeleteMapping("/deleteCargoNode")

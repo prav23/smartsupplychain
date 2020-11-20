@@ -1,6 +1,8 @@
 package com.cmpe281.smartcargonode.service;
 
+import com.cmpe281.smartcargonode.model.Cargo;
 import com.cmpe281.smartcargonode.model.Sensor;
+import com.cmpe281.smartcargonode.util.CargoRowMapper;
 import com.cmpe281.smartcargonode.util.SensorRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,6 +73,7 @@ public class CargoNodeServiceImpl implements CargoNodeService {
         return true;
     }
 
+    /*
     @Override
     public Sensor addCargoNode(Integer cargo_node_id, String sensor_name, String sensor_data, String sensor_data_format, String sensor_status){
         logger.info("addCargoNode");
@@ -103,21 +106,48 @@ public class CargoNodeServiceImpl implements CargoNodeService {
             return null;
         }
     }
+     */
 
     @Override
     public Boolean deleteCargoNode(Integer cargo_node_id){
-        String query = "DELETE FROM sensor WHERE cargo_node_id = ?";
-        logger.info("delete all sensors in cargo_node_id"+ cargo_node_id);
+        String query = "DELETE FROM cargo WHERE cargo_node_id = ?";
+        logger.info("delete all cargo and its sensors for given cargo_node_id"+ cargo_node_id);
         logger.info("delete query :"+ query);
 
         if (jdbcTemplate.update(query, cargo_node_id) == 0) {
             logger.info("deletion failed for sensor: " + cargo_node_id);
         } else {
-            logger.info("deleteSensor -- sensorId: " + cargo_node_id + " removed from task table");
+            logger.info("deleteCargoNode -- cargo_node_id: " + cargo_node_id + " removed from cargo table");
         }
 
-        logger.info("deleteSensor -- deletion complete");
+        logger.info("deleteCargoNode -- deletion complete");
         return true;
     }
 
+    @Override
+    public Cargo addCargoNode(String cargo_node_name){
+        logger.info("addCargoNode");
+        String add_cargo_query = "INSERT INTO cargo(cargo_node_name)" + "VALUES (?)";
+        logger.info("addCargoNode -- INSERT SQL: " + add_cargo_query);
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int numRows = jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(add_cargo_query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, cargo_node_name);
+            return ps;
+        }, keyHolder);
+
+        if (numRows > 0) {
+            logger.info("createCargo -- success");
+            Cargo cargo = jdbcTemplate.queryForObject("SELECT * FROM cargo WHERE cargo_node_id = ?",
+                    new Object[]{keyHolder.getKey()},
+                    new CargoRowMapper());
+            return cargo;
+        } else {
+            logger.error("failed to create new cargo record in the db");
+            return null;
+        }
+    }
 }
