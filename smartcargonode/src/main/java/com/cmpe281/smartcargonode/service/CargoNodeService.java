@@ -17,5 +17,7 @@ public interface CargoNodeService {
 
     Cargo addCargoNode(String cargo_node_name);
 
+    List<Cargo> getAllCargoNodesList();
+
 }
 

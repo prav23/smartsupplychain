@@ -73,41 +73,6 @@ public class CargoNodeServiceImpl implements CargoNodeService {
         return true;
     }
 
-    /*
-    @Override
-    public Sensor addCargoNode(Integer cargo_node_id, String sensor_name, String sensor_data, String sensor_data_format, String sensor_status){
-        logger.info("addCargoNode");
-        String add_sensor_query = "INSERT INTO sensor(cargo_node_id, sensor_name, sensor_data, sensor_data_format, sensor_status, time_stamp)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
-        logger.info("addSensor -- INSERT SQL: " + add_sensor_query);
-
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        int numRows = jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(add_sensor_query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, cargo_node_id);
-            ps.setString(2, sensor_name);
-            ps.setString(3, sensor_data);
-            ps.setString(4, sensor_data_format);
-            ps.setString(5, sensor_status);
-            ps.setTimestamp(6, timestamp);
-            return ps;
-        }, keyHolder);
-
-        if (numRows > 0) {
-            logger.info("createProject -- success");
-            Sensor sensor = jdbcTemplate.queryForObject("SELECT * FROM sensor WHERE sensor_id = ?",
-                    new Object[]{keyHolder.getKey()},
-                    new SensorRowMapper());
-            return sensor;
-        } else {
-            logger.error("failed to create new sensor record in the db");
-            return null;
-        }
-    }
-     */
-
     @Override
     public Boolean deleteCargoNode(Integer cargo_node_id){
         String query = "DELETE FROM cargo WHERE cargo_node_id = ?";
@@ -150,4 +115,21 @@ public class CargoNodeServiceImpl implements CargoNodeService {
             return null;
         }
     }
+
+    @Override
+    public List<Cargo> getAllCargoNodesList(){
+        logger.info("getAllCargoNodesList");
+        String query = "SELECT * FROM cargo";
+        logger.info("getAllCargoNodesList -- SELECT SQL: " + query);
+
+        try {
+            List<Cargo> cargoNodes = jdbcTemplate.query(query, new Object[]{}, new CargoRowMapper());
+            return cargoNodes;
+        }
+        catch (EmptyResultDataAccessException e) {
+            logger.info("getCargoNodeSensorData -- exception caught no results queried");
+            return Collections.emptyList();
+        }
+    }
+
 }

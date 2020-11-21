@@ -59,19 +59,6 @@ public class CargoNodeResource {
         return cargoNodeService.transferAllCargoNodesSensorData();
     }
 
-    /*
-    @PostMapping("/addCargoNode")
-    @ApiOperation(value = "Adds a cargo node with default sensor's data",
-            notes = "DB query against the 'sensor' table.Returns Cargo Node if addition is successful")
-    public Sensor addCargoNode(@ApiParam(value = "cargo_node_id", required = true) @RequestParam Integer cargo_node_id,
-                            @ApiParam(value = "sensor_name", required = true) @RequestParam String sensor_name,
-                            @ApiParam(value = "sensor_data", required = true) @RequestParam String sensor_data,
-                            @ApiParam(value = "sensor_data_format", required = true) @RequestParam String sensor_data_format,
-                            @ApiParam(value = "sensor_status", required = true) @RequestParam String sensor_status){
-        return cargoNodeService.addCargoNode(cargo_node_id, sensor_name, sensor_data, sensor_data_format, sensor_status);
-    }
-     */
-
     @PostMapping("/addCargoNode")
     @ApiOperation(value = "Adds a cargo node with given cargo_node_name",
             notes = "DB query against the 'cargo' table.Returns Cargo Node if addition is successful")
@@ -84,6 +71,15 @@ public class CargoNodeResource {
             notes = "DB query against the sensor table. Returns true if deletion is success else returns false")
     public Boolean deleteCargoNode(@ApiParam(value = "cargo_node_id", required = true) @RequestParam Integer cargo_node_id){
         return cargoNodeService.deleteCargoNode(cargo_node_id);
+    }
+
+    @GetMapping("/getAllCargoNodesList")
+    @ApiOperation(value = "Fetches all cargo nodes data",
+            notes = "DB query against the 'cargo' table",
+            response = Cargo.class, responseContainer = "List")
+    public List<Cargo> getAllCargoNodesList() {
+        logger.info("CargoNodeResource::getAllCargoNodesSensorData() -- fetching all sensors data");
+        return cargoNodeService.getAllCargoNodesList();
     }
 
 }
